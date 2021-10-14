@@ -1,1 +1,67 @@
+# Code to make PCA plots of modern dataset
+# Requires West_East.pca.evec file and West_East_25.pca_het.txt file
+# Also required these two files for the Baltic-East and NEAC-East populations
+
+setwd('~/Documents/Oslo_Workshop/')
+
+#import PCA values
+eigenvec_table_WestEast <- read.table("West_East_25.pca.evec")
+
+eigenvec_table_BalticEast <- read.table("Baltic_East_25.pca.evec")
+
+eigenvec_table_NEACEast <- read.table("NEAC_East_25.pca.evec")
+
+#load ggplot
+
+library(ggplot2)
+
+#Plot PCAs with ggplot2
+
+eigenvec_plot_WestEast <- ggplot(eigenvec_table_WestEast, aes(x = V2, y = V3)) + 
+  geom_point(size = 2, colour = "Blue") +
+  labs(title = "PCA",
+       x = "PC1", y = "PC2") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust=0.5))
+
+eigenvec_plot_WestEast
+
+eigenvec_plot_BalticEast <- ggplot(eigenvec_table_BalticEast, aes(x = V2, y = V3)) + 
+  geom_point(size = 2, colour = "Purple") +
+  labs(title = "PCA",
+       x = "PC1", y = "PC2") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust=0.5))
+
+eigenvec_plot_BalticEast
+
+eigenvec_plot_NEACEast <- ggplot(eigenvec_table_NEACEast, aes(x = V2, y = V3)) + 
+  geom_point(size = 2, colour = "Orange") +
+  labs(title = "PCA",
+       x = "PC1", y = "PC2") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust=0.5))
+
+eigenvec_plot_NEACEast
+
+#combine plots
+
+library(ggpubr)
+library(cowplot)
+
+masterplot2 <- ggarrange(eigenvec_plot_WestEast, eigenvec_plot_BalticEast, eigenvec_plot_NEACEast, labels = c("West-East", "Baltic-East", "NEAC-East"),ncol = 1, nrow = 3)
+masterplot2
+
+#export as PNG
+
+png(filename="masterplot2.png", 
+    units="cm", 
+    width=10, 
+    height=20, 
+    pointsize=12, 
+    res=300)
+
+masterplot2
+
+dev.off()
 

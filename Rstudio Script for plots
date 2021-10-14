@@ -1,6 +1,5 @@
 # Code to make PCA plots of modern dataset
-# Requires West_East.pca.evec file and West_East_25.pca_het.txt file
-# Also required these two files for the Baltic-East and NEAC-East populations
+# Requires West_East.pca.evec file, Baltic_East.pca.evec file and NEAC_East.pca.evec file
 
 setwd('~/Documents/Oslo_Workshop/')
 
